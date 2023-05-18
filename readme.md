@@ -60,7 +60,7 @@ persistence true
 listener 1884 0.0.0.0
 ```
 
-In the `docker-compose` file the port `1883` is exposed and bound to te host machine.
+In the `docker-compose` file the port `1883` is exposed and bound to the host machine.
 If you have a firewall (in my case iptables) you need to add an allow rule on 
 port 1883/TCP to you input chain.
 
