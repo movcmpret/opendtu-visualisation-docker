@@ -1,19 +1,3 @@
-
-1. grafana domain in grafana.ini
-2. env file: influx db, name, pw
-3. mosquitto password creation (admin/password)
-4. mosquitto tls (letsencrypt) / local docker network explanation
-5. telegraf config. weather API key, long, lat, mosquitto connection
-
-
-- architecture visualisation image
-
-
-
-
-
-
-
 # openDTU visualisation docker setup 
 
 This docker setup contains all services needed in order to receive, provide, store and visualize data coming from your openDTU device.
@@ -133,6 +117,8 @@ and `password` in your `telegraf.conf`.
 If you want to have weather data available you need to create a free account 
 at [OpenWeatherMap](https://openweathermap.org/) to obtain an API Key. Replace
 each `YOURAPIKEY` in the default telegraf config file `telegraf.conf`.
+
+Set `YOUR_CITY_ID`, latitude and longitude in this config as well.
 
 ### InfluxDB
 
