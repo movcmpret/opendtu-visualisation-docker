@@ -1,0 +1,72 @@
+version: '3'
+
+services:
+  grafana:
+    image: grafana/grafana:9.5.2
+    ports:
+      - 127.0.0.1:${GRAFANA_PORT}:3000
+    restart: always
+    environment:
+      - GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS=grafana-mqtt-datasource
+    volumes:
+      - ./grafana_data:/var/lib/grafana
+      - ./grafana.ini:/etc/grafana/grafana.ini
+    networks:
+      - grafana_network
+    user: ${UID}
+
+  mosquitto:
+    image: eclipse-mosquitto:2
+    user: ${UID}
+    restart: always
+    volumes:
+      - type: bind
+        source: ./mosquitto_config/
+        target: /mosquitto/config/
+      - type: bind
+        source: ./mosquitto_log/
+        target: /mosquitto/log/
+      - type: bind
+        source: ./mosquitto_data
+        target: /mosquitto/data/
+      - type: bind
+        source: ./mosquitto_tls
+        target: /mosquitto/tls/
+    networks:
+      - grafana_network
+    ports:
+      - 1883:1883
+      #- 127.0.0.1:9001:9001 # no host binding
+
+  telegraf:
+    image: telegraf:1.24.4
+    container_name: telegraf
+    restart: always
+    volumes:
+    - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+    depends_on:
+      - influxdb
+    links:
+      - influxdb
+    networks:
+      - grafana_network
+    #ports:
+    #- '8125:8125' # no host binding
+
+  influxdb:
+    image: influxdb:1.8-alpine
+    container_name: influxdb
+    restart: always
+    environment:
+      - INFLUXDB_DB=${INFLUXDB_DB}
+      - INFLUXDB_ADMIN_USER=${INFLUXDB_ADMIN_USER}
+      - INFLUXDB_ADMIN_PASSWORD=${INFLUXDB_ADMIN_USER}
+    #ports:
+    #  - '8086:8086' # no host binding
+    networks:
+      - grafana_network
+    volumes:
+      - ./influxdb_data:/var/lib/influxdb
+
+networks:
+  grafana_network:
