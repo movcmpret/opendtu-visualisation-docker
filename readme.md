@@ -144,5 +144,7 @@ after your first login.
 ## Credits
 
 https://github.com/Setcover/smarthome/blob/main/telegraf/telegraf.conf
+
 https://github.com/vvatelot/mosquitto-docker-compose
+
 http://www.steves-internet-guide.com/mosquitto-tls/
