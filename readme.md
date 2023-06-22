@@ -1,7 +1,7 @@
 # openDTU visualisation docker setup 
 ![grafana](https://github.com/movcmpret/opendtu-visualisation-docker/assets/43320190/4a0e25f8-e559-4233-9262-66fcad97d611)
 
-This docker setup contains all services needed in order to receive, provide, store and visualize data coming from your openDTU device.
+This docker setup contains all services needed in order to receive, provide, store, visualize and monitor data coming from your [openDTU](https://github.com/tbnobody/OpenDTU) device.
 
 ## Infrastructure
 
