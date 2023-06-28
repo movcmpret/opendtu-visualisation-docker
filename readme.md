@@ -140,7 +140,9 @@ but I recommend to use a reverse proxy.
 The default login is `admin:admin`. You are forced to set a new password immediately 
 after your first login.
 
+### Optional
 
+Import `example_dashboard.json` in your grafana UI
 
 ## Credits
 
